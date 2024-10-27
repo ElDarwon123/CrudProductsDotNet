@@ -1,0 +1,58 @@
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Archivos generados por Visual Studio
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Archivos de la compilación
+bin/
+obj/
+out/
+
+# Archivos de configuración
+appsettings*.json
+.env
+
+# Paquetes NuGet
+*.nupkg
+packages/
+.nuget/
+
+# Archivos generados por el depurador
+*.log
+*.tlog
+*.ide
+
+# Archivos temporales y de respaldo
+*.tmp
+*.temp
+*.bak
+*.old
+
+# Configuración de bases de datos locales y conexiones sensibles
+*.vs
+*.vs/
+.vs/
+.vscode/
+*.db
+*.sqlite
+*.mdf
+*.ldf
+
+# Archivos de publicación
+publish/
+*.pubxml
+*.publishsettings
+
+# Configuración de Rider y otros IDEs
+.idea/
+*.sln.iml
+.idea_modules/
+
+# Configuración de usuario de Visual Studio
+.vscode/
+.vscode/
