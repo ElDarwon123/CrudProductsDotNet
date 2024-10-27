@@ -161,7 +161,7 @@ namespace CrudProducts.API.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [EndpointSummary("Actualizar un producto")]
         [EndpointDescription("EndPoint para poder actualizar un solo producto por su id")]
-        public async Task<ActionResult> UpdateProduct(Guid id, [FromBody] PatchProductCommand command)
+        public async Task<ActionResult> UpdateProduct(Guid id, [FromForm] PatchProductCommand command, IFormFile? imagen)
         {
             // Verifica si el modelo es válido
             if (!ModelState.IsValid)
@@ -184,6 +184,28 @@ namespace CrudProducts.API.Controllers
             if (command.Precio <= 0)
             {
                 return BadRequest("El precio debe ser mayor que cero.");
+            }
+
+            // Procesa la imagen si se proporciona
+            if (imagen != null)
+            {
+                try
+                {
+                    using var memoryStream = new MemoryStream();
+                    await imagen.CopyToAsync(memoryStream);
+
+                    using (var image = Image.Load(memoryStream.ToArray()))
+                    {
+                        image.Mutate(x => x.Resize(800, 600));
+                        using var compressedStream = new MemoryStream();
+                        await image.SaveAsJpegAsync(compressedStream);
+                        command.Imagen = compressedStream.ToArray();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    return StatusCode(500, "Error al procesar la imagen: " + ex.Message);
+                }
             }
 
             command.id = id; // Asigna el ID al comando

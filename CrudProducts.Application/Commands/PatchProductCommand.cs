@@ -17,16 +17,21 @@ namespace CrudProducts.Application.Commands
         // Propiedades opcionales que pueden actualizarse en el producto
         public string? Nombre { get; set; }
         public string? Descripcion { get; set; }
+        public byte[]? Imagen { get; set; }
         public decimal? Precio { get; set; }
         public decimal? Descuento { get; set; }
 
+        // Constructor vacio
+        public PatchProductCommand() { }
+
         // Constructor que inicializa las propiedades del comando
-        public PatchProductCommand(Guid Id, string? nombre, string? descripcion, decimal? precio, decimal? descuento)
+        public PatchProductCommand(Guid Id, string? nombre, string? descripcion, byte[]? imagen, decimal? precio, decimal? descuento)
         {
             // Asigna valores a las propiedades para el comando de actualización
             id = Id;
             Nombre = nombre;
             Descripcion = descripcion;
+            Imagen = imagen;
             Precio = precio;
             Descuento = descuento;
         }
